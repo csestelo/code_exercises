@@ -7,14 +7,6 @@ from collections import defaultdict
 from unittest import TestCase
 
 
-def handshake(n):
-    # https://mathworld.wolfram.com/HandshakeProblem.html
-    # https://www.geeksforgeeks.org/number-of-handshakes-such-that-a-person-shakes-hands-only-once/
-    if n == 0:
-        return 0
-    return (n - 1) + handshake(n - 1)
-
-
 def sherlock_and_anagrams(word: str) -> int:
     anagrams = 0
     words = defaultdict(int)
@@ -25,8 +17,7 @@ def sherlock_and_anagrams(word: str) -> int:
             words[sorted_ss] += 1
 
     for v in words.values():
-        if v > 1:
-            anagrams += handshake(v)
+        anagrams += v * (v - 1) // 2
 
     return anagrams
 
