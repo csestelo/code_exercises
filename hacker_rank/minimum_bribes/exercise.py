@@ -54,7 +54,7 @@ class TestMinimumBribes(TestCase):
 
     def test_super_complex_scenario(self):
         results = []
-        with open("minimum_bribes_big_input.txt", encoding="utf-8") as content:
+        with open("big_input_test.txt", encoding="utf-8") as content:
             for line in content:
                 final_q = list(map(int, line.split()))
                 results.append(minimum_bribes(final_q))
