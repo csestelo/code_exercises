@@ -12,6 +12,11 @@ from unittest import TestCase
 from hacker_rank.frequency_queries.big_input_result import expected_result
 
 
+def update_frequencies(cont: defaultdict, from_: int, to: int) -> None:
+    cont[from_] -= 1
+    cont[to] += 1
+
+
 def freq_query(queries: list[list[int]]) -> list[int]:
     freq_count = defaultdict(int)
     frequencies = defaultdict(int)
@@ -23,17 +28,17 @@ def freq_query(queries: list[list[int]]) -> list[int]:
         if operation == 1:
             freq_count[data] += 1
 
-            # update found frequencies
-            frequencies[freq_count[data]] += 1
-            frequencies[freq_count[data] - 1] -= 1
+            update_frequencies(
+                frequencies, freq_count[data] - 1, freq_count[data]
+            )
 
         elif operation == 2:
             if freq_count[data] > 0:
                 freq_count[data] -= 1
 
-                # update found frequencies
-                frequencies[freq_count[data]] += 1
-                frequencies[freq_count[data] + 1] -= 1
+                update_frequencies(
+                    frequencies, freq_count[data] + 1, freq_count[data]
+                )
 
         elif operation == 3:
             result.append(int(frequencies[data] > 0))
